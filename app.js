@@ -9,6 +9,7 @@ require('./config/db');
 const app = express();
 
 const poll = require('./routes/poll');
+const createPoll = require('./routes/createPoll');
 
 //Set public folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -21,6 +22,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
 
 app.use('/poll', poll);
+
+app.use('/createPoll', createPoll);
 
 const port = 3000;
 
