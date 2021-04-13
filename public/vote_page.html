@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- style sheet for materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Super Poll</title>
+</head>
+
+<body>
+    <!-- Question and response form -->
+    <div class="container">
+        <h1>Poll</h1>
+        <p>Vote</p>
+        <form id="vote-form">
+            <p>
+                <label>
+                    <input type="radio" name="ans" id="choice1" value="choice1" >
+                    <span for="choice1">Choice 1</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input type="radio" name="ans" id="choice2" value="choice2">
+                    <span for="choice2">Choice 2</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input type="radio" name="ans" id="choice3" value="choice3">
+                    <span for="choice3">Choice 3</span>
+                </label>
+            </p>
+            <input type="submit" value="Vote" class="btn">
+        </form>
+
+        <br><br>
+        <!-- For showing responses -->
+        <div id="chartContainer" style="height :300px; width:100%"></div>
+
+    </div>
+
+    <!-- cdn for jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <!-- cdn for materialize css -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Pusher cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pusher/7.0.3/pusher.min.js" integrity="sha512-XVnzJolpkbYuMeISFQk6sQIkn3iYUbMX3f0STFUvT6f4+MZR6RJvlM5JFA2ritAN3hn+C0Bkckx2/+lCoJl3yg==" crossorigin="anonymous"></script>
+    <!-- CanvasJS cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js" integrity="sha512-FJ2OYvUIXUqCcPf1stu+oTBlhn54W0UisZB/TNrZaVMHHhYvLBV9jMbvJYtvDe5x/WVaoXZ6KB+Uqe5hT2vlyA==" crossorigin="anonymous"></script>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
