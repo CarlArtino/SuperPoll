@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>One Page Wonder - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/one-page-wonder.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <!--<a class="navbar-brand" href="#">Start Bootstrap</a>-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"> Super Poll</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Log In</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="masthead text-center text-white">
+        <div class="masthead-content">
+            <div class="container">
+                <h1 class="masthead-heading mb-0">Create Poll</h1>
+            </div>
+            <style type="text/css">
+                num-button {
+                    height: 20px;
+                }
+            </style>
+        </div>
+
+    </header>
+    <section>
+        <button id="q-field" onclick="addQuestionfield()">Add new question field</button>
+        <div class="container ">
+            <div class="row align-items-center ">
+                <div class="col-lg-6 order-lg-2 ">
+                    <br/>
+                    <form action="/question-added" id="questions-form">
+
+                    </form>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class=" py-5 bg-black ">
+        <div class="container ">
+            <p class="m-0 text-center text-white small "><a href="https://github.com/CarlArtino/SuperPoll ">Link to Our Github</a></p>
+        </div>
+        <!-- /.container -->
+    </footer>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js "></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js "></script>
+
+    <script type='text/javascript'>
+        createBr = () => {
+            return document.createElement("br");
+        }
+
+        createInputElement = (type, placeholder, isRequired) => {
+            var el = document.createElement("input");
+            el.setAttribute("type", type);
+            if(type != "submit") {
+            el.setAttribute("required", isRequired);
+            el.setAttribute("placeholder", placeholder);
+          }
+          else {
+            el.setAttribute("value", "Create Poll");
+            el.setAttribute("id", "poll-create");
+          }
+
+            return el;
+        }
+
+        createLabel = (title) => {
+          var label = document.createElement("label");
+          label.innerHTML = title;
+
+          return label;
+        }
+
+        let addQuestionfield = () => {
+            console.log("new q called");
+
+            //delete submit button
+            var submitButton = document.getElementById("poll-create");
+            if(submitButton != null) submitButton.remove();
+            //submitButton.parentNode.deleteChild(submitButton);
+            var theForm = document.getElementById("questions-form");
+
+            //create and add  question element
+            var labl = document.createElement("label")
+            labl.innerHTML = "Next Question";
+
+            var input1 = document.createElement("input");
+            input1.setAttribute("type", "text");
+            input1.setAttribute("placeholder", "Question");
+
+            theForm.appendChild(createBr());
+            theForm.appendChild(createBr());
+            theForm.appendChild(createBr());
+            theForm.appendChild(createBr());
+
+            theForm.appendChild(createLabel("New Question"));
+            theForm.appendChild(createBr());
+           theForm.appendChild(createInputElement("text", "Question", true));
+
+            //create and add answers element
+            theForm.appendChild(createBr());
+            theForm.appendChild(createLabel("Correct Answer"));
+            theForm.appendChild(createBr());
+            theForm.appendChild(createInputElement("text", "Correct Answer", true));
+            theForm.appendChild(createBr());
+            theForm.appendChild(createLabel("Other Answers"));
+            theForm.appendChild(createBr());
+            theForm.appendChild(createInputElement("text", "Dog"));
+            theForm.appendChild(createBr());
+            theForm.appendChild(createInputElement("text", "Cat"));
+            theForm.appendChild(createBr());
+            theForm.appendChild(createInputElement("text", "Mouse"));
+
+            //replacing submit button with new one on the bottom
+            theForm.appendChild(createBr());
+            theForm.appendChild(createInputElement("submit","Create Poll" ))
+        }
+
+      </script>
+</body>
+
+</html>
