@@ -22,6 +22,8 @@ app.use(cors());
 
 app.use('/poll', poll);
 
+app.use('/createPoll', createPoll);
+
 const port = 3000;
 
 //start server
