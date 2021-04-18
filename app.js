@@ -9,6 +9,7 @@ require('./config/db');
 const app = express();
 
 const poll = require('./routes/poll');
+const createPoll = require('./routes/createPoll');
 
 //Set public folder
 app.use(express.static(path.join(__dirname, 'public')));

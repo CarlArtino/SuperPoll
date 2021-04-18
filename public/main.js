@@ -1,5 +1,36 @@
 const form = document.getElementById("vote-form");
 
+//create poll function that calls the backend funciton
+function createPoll(){
+    //This is all dummy test data
+    //data will need to be filled with values from user input
+    const data = {
+        title: 'Test Poll',
+        author: 'Dom',
+        questions: [
+            {
+                question: 'Is this right',
+                choices:['yes', 'no']
+            },
+            {
+                question: 'Do you like Dogs',
+                choices: ['Yes', 'No','Maybe']
+            }
+        ]      
+    }
+    //call backend
+    fetch('http://localhost:3000/createPoll',{
+        method: 'post',
+        body: JSON.stringify(data),
+        headers: new Headers({
+            'Content-Type' :'application/json'     
+        })
+    })
+    .then(response =>{
+        console.log(response.json());
+    })
+    .catch(err=>console.log(err));
+}
 
 //form submit event
 form.addEventListener('submit', e => {
