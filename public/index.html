@@ -1,60 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- style sheet for materialize css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <title>Super Poll</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>One Page Wonder - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/one-page-wonder.min.css" rel="stylesheet">
+
 </head>
+
 <body>
-    <!-- Question and response form -->
-    <div class="container">
-        <h1>Poll</h1>
-        <p>Vote</p>
-        <form id="vote-form" >
-            <p>
-                <label>
-                    <input type="radio" name="ans" id="choice1" value="choice1" >
-                    <span for="choice1">Choice 1</span>
-                </label>
-            </p>
-            <p>
-                <label>
-                    <input type="radio" name="ans" id="choice2" value="choice2">
-                    <span for="choice2">Choice 2</span>
-                </label>
-            </p>
-            <p>
-                <label>
-                    <input type="radio" name="ans" id="choice3" value="choice3">
-                    <span for="choice3">Choice 3</span>
-                </label>
-            </p>
-            <input type="submit" value="Vote" class="btn">
-        </form>
 
-        <br><br>
-        <!-- For showing responses -->
-        <div id="chartContainer" style="height :300px; width:100%"></div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <!--<a class="navbar-brand" href="#">Start Bootstrap</a>-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Log In</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    </div>
-    
-    <!-- cdn for jquery -->
-    <script
-    src="https://code.jquery.com/jquery-3.6.0.js"
-    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-    crossorigin="anonymous"></script>
+    <header class="masthead text-center text-white">
+        <div class="masthead-content">
+            <div class="container">
+                <h1 class="masthead-heading mb-0">Super Poll</h1>
+                <h2 class="masthead-subheading mb-0">Enter your Hosts code</h2>
+                <form action="">
+                    <input type="number" class="num-button">
+                    <br/>
+                    <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5 ">Start Voting</button>
+                </form>
 
-    <!-- cdn for materialize css -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            </div>
+            <style type="text/css">
+                num-button {
+                    height: 100px;
+                }
+            </style>
+        </div>
 
-    <!-- Pusher cdn -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pusher/7.0.3/pusher.min.js" integrity="sha512-XVnzJolpkbYuMeISFQk6sQIkn3iYUbMX3f0STFUvT6f4+MZR6RJvlM5JFA2ritAN3hn+C0Bkckx2/+lCoJl3yg==" crossorigin="anonymous"></script>
-    <!-- CanvasJS cdn -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js" integrity="sha512-FJ2OYvUIXUqCcPf1stu+oTBlhn54W0UisZB/TNrZaVMHHhYvLBV9jMbvJYtvDe5x/WVaoXZ6KB+Uqe5hT2vlyA==" crossorigin="anonymous"></script>
-
-    <script src="main.js"></script>
+        <div class="bg-circle-1 bg-circle "></div>
+        <div class="bg-circle-2 bg-circle "></div>
+        <div class="bg-circle-3 bg-circle "></div>
+        <div class="bg-circle-4 bg-circle "></div>
+    </header>
+    <section>
+        <div class="container ">
+            <div class="row align-items-center ">
+                <div class="col-lg-6 order-lg-2 ">
+                    <div class="p-5 "><a href="create_form.html" class="btn btn-primary btn-xl rounded-pill mt-5 ">Create Poll</a></div>
+                </div>
+                <div class="col-lg-6 order-lg-1 ">
+                    <div class="p-5 ">
+                        <h2 class="display-4 ">Create your own Poll</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="py-5 bg-black ">
+        <div class="container ">
+            <p class="m-0 text-center text-white small "><a href="https://github.com/CarlArtino/SuperPoll ">Link to Our Github</a></p>
+        </div>
+        <!-- /.container -->
+    </footer>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js "></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js "></script>
 </body>
+
 </html>

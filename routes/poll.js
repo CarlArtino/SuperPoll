@@ -14,25 +14,25 @@ const pusher = new Pusher({
     useTLS: true
 });
 
+router.get('/create-poll', (request, response) => {
+    consoloe.log("Vote page has been called")
+    return response.sendFile('/public/create_form.html', { root: __dirname })
+})
+
 // url/poll
 router.get('/', (request, response) => {
-    Vote.find().then(votes => response.json({success: true,
-    votes: votes}));
+    console.log("Page has been callled");
+    response.send('SUPER POLL');
 });
 
 router.post('/', (request, response) => {
-    const newVote = {
-        ans: request.body.ans,
-        points: 1
-    }
-
-    new Vote(newVote).save().then(vote => {
-        pusher.trigger("poll", "vote", {
-            points: parseInt(vote.points),
-            ans: vote.ans
-          });
-          return response.json({success: true, message: 'Thanks for voting'});
+    console.log("Page has")
+    pusher.trigger("poll", "vote", {
+        points: 1,
+        ans: request.body.ans
     });
+    return response.json({ success: true, message: 'Thanks for voting' });
 });
+
 
 module.exports = router;
