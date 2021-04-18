@@ -14,10 +14,6 @@ const pusher = new Pusher({
     useTLS: true
 });
 
-router.get('/create-poll', (request, response) => {
-    consoloe.log("Vote page has been called")
-    return response.sendFile('/public/create_form.html', { root: __dirname })
-})
 
 // url/poll
 router.get('/', (request, response) => {
