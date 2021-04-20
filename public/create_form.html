@@ -81,6 +81,7 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js "></script>
 
     <script type='text/javascript'>
+    var baseQuestionClass =  0;
         createBr = () => {
             return document.createElement("br");
         }
@@ -91,10 +92,12 @@
             if(type != "submit") {
             el.setAttribute("required", isRequired);
             el.setAttribute("placeholder", placeholder);
+            el.setAttribute("class",baseQuestionClass);
           }
           else {
             el.setAttribute("value", "Create Poll");
             el.setAttribute("id", "poll-create");
+
           }
 
             return el;
@@ -102,6 +105,7 @@
 
         createLabel = (title) => {
           var label = document.createElement("label");
+          //label.setAttribute("id", baseQuestionId + title);
           label.innerHTML = title;
 
           return label;
@@ -150,6 +154,7 @@
             //replacing submit button with new one on the bottom
             theForm.appendChild(createBr());
             theForm.appendChild(createInputElement("submit","Create Poll" ))
+            baseQuestionClass += 1;
         }
 
       </script>
