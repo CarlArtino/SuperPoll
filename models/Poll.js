@@ -4,10 +4,7 @@ const Schema = mongoose.Schema;
 //Every poll has a title, author(optional), and an array of question objects
 //each question object contains the question, an array of the choices, and an array of the votes
 const PollSchema = new Schema({
-    title: {
-        type: String,
-        required: true
-    },
+    title: String,
     author: String,
     questions: [{
         question: String,
