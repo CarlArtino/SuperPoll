@@ -61,7 +61,7 @@
             <div class="row align-items-center ">
                 <div class="col-lg-6 order-lg-2 ">
                     <br/>
-                    <form action="/question-added" id="questions-form">
+                    <form id="questions-form">
 
                     </form>
                     <br/>
@@ -81,7 +81,10 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js "></script>
 
     <script type='text/javascript'>
-    var baseQuestionClass =  0;
+
+    //This is incremented everytime a new question field is added to the form and is used as a unique class for each question
+    var baseFormId =  0;
+    var subFormId=0;
         createBr = () => {
             return document.createElement("br");
         }
@@ -92,7 +95,8 @@
             if(type != "submit") {
             el.setAttribute("required", isRequired);
             el.setAttribute("placeholder", placeholder);
-            el.setAttribute("class",baseQuestionClass);
+            el.setAttribute("id", baseFormId.toString() + subFormId.toString());
+            subFormId++;
           }
           else {
             el.setAttribute("value", "Create Poll");
@@ -154,7 +158,9 @@
             //replacing submit button with new one on the bottom
             theForm.appendChild(createBr());
             theForm.appendChild(createInputElement("submit","Create Poll" ))
-            baseQuestionClass += 1;
+            baseFormId+= 1;
+            subFormId = 0;
+
         }
 
       </script>
