@@ -1,5 +1,7 @@
+const form = document.getElementById("questions-form");
 //create poll function that calls the backend funciton
-function createPoll() {
+form.addEventListener('submit', e=> {
+    
     theQuestion =document.forms["questions-form"].getElementsByTagName("input")[0].value
     answer1 =document.forms["questions-form"].getElementsByTagName("input")[1].value;
     answer2 = document.forms["questions-form"].getElementsByTagName("input")[2].value;
@@ -24,15 +26,14 @@ function createPoll() {
           body: JSON.stringify(data),
           headers: new Headers({
               'Content-Type' :'application/json'
-          })
+          })        
       })
-      .then(response =>{
+      .then(response => response.json())
+      .then(data =>{
           console.log("Check");
-          console.log(response);
-          console.log(response.json());
+          console.log(data);
       })
       .catch(err=>console.log(err));
-  
-  
-  }
+    e.preventDefault();
+});
   

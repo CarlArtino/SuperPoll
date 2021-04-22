@@ -24,7 +24,7 @@ router.post('/', (request,response)=>{
     new Poll(newPoll).save().then(poll =>{
         console.log(poll);
         console.log(poll._id);
-        return response.status(200).json({id: poll._id});
+        return response.status(201).send(poll._id);
     })
     .catch(err=>{
         console.log(err);
