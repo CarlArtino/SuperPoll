@@ -16,6 +16,7 @@ form.addEventListener('submit', e => {
     .then(data =>{
         console.log("Check");
         console.log(data);
+        window.location.replace( 'http://www.localhost:3000/vote_page.html');
     })
     .catch(err=>console.log(err));
 
