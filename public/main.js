@@ -6,7 +6,13 @@ var pollQuestion;
 //form submit event
 form.addEventListener('submit', e => {
     const choice = document.querySelector('input[name=ans]:checked').value;
-    const data = {ans:choice};
+    const poll = JSON.parse(localStorage.getItem('poll'));
+    const id = poll._id;
+    const question = poll.questions[0].question;
+    const data = {ans:choice,
+                  id: id,
+                  question: question
+                };
 
     fetch('http://localhost:3000/poll', {
         method: 'post',
@@ -35,6 +41,7 @@ createEmbbededChoiceElement = (inputId, value)=> {
    input.setAttribute('type', 'radio');
    input.setAttribute('name', 'ans');
    input.setAttribute('id','option-' + inputId);
+   input.setAttribute('value', value);
    
     
    label.appendChild(input);
@@ -111,9 +118,10 @@ setPossibleAnswers = (possibleAnswers) => {
 function loadQuestion(){
         //get object from local storage
         const poll = JSON.parse(localStorage.getItem('poll'));
-        console.log(poll.questions);
+        //console.log(poll.questions);
         const votes = poll.questions[0].votes;
         pollQuestion = poll.questions[0].question;
+        const choices = poll.questions[0].choices;
 
         
 
@@ -125,23 +133,39 @@ function loadQuestion(){
 
         fillQuestionForm(poll);
 
-        console.log(votes);
         const totalVotes = votes.length;
 
-        
-        // Count vote points - acc/current
-        const voteCounts = votes.reduce(
-            (acc, vote) => (
-                (acc[vote.ans] = (acc[vote.ans] || 0) + parseInt(vote.points)), acc
-                ),
-                {}
-            );
+        //Create array parallel to choices that holds the number of votes
+        let voteCounts = new Array(choices.length);
+        for(let i = 0; i<votes.length; ++i)
+        {
+            for(let j = 0; j<choices.length; ++j)
+            {
+                if(votes[i] == choices[j])
+                {
+                    voteCounts[j]++;
+                }
+            }
+        }
 
-        let dataPoints = [
-            {label : 'choice1', y: voteCounts.choice1},
-            {label : 'choice2', y: voteCounts.choice2},
-            {label : 'choice3', y: voteCounts.choice3},
-        ];
+        // const voteCounts = votes.reduce(
+        //     (acc, vote) => (
+        //         (acc[vote] = (acc[vote] || 0) + 1), acc
+        //         ),
+        //         {}
+        //     );
+        //console.log(voteCounts);
+        let dataPoints = new Array();
+        
+        for(let i = 0; i<choices.length; ++i)
+        {
+            dataPoints.push({label: choices[i], y: voteCounts[i]});
+        }
+        // let dataPoints = [
+        //     {label : 'choice1', y: voteCounts.choice1},
+        //     {label : 'choice2', y: voteCounts.choice2},
+        //     {label : 'choice3', y: voteCounts.choice3},
+        // ];
 
         const chartContainer = document.querySelector('#chartContainer');
 

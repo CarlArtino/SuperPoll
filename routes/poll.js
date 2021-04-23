@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const ObjectID = require('mongodb').ObjectID;
 
 const Vote = require('../models/Vote');
 const Poll = require('../models/Poll');
@@ -28,8 +29,14 @@ const pusher = new Pusher({
 //     });
 // });
 
+
 router.post('/', (request, response) => {
-    console.log("Page has")
+
+    Poll.updateOne({"_id": request.body.id, "questions.question": request.body.question}, {$push: {"questions.$.votes": request.body.ans}}, (err, res)=>{
+        if(err)
+            console.log(err);
+    });
+
     pusher.trigger("poll", "vote", {
         points: 1,
         ans: request.body.ans
