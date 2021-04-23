@@ -15,25 +15,27 @@
     <script src="main.js" defer></script>
     <!-- Question and response form -->
     <div class="container">
-        <h1>Poll</h1>
+        <h1 id= "the-question">
+           
+        </h1>
         <p>Vote</p>
         <form id="vote-form">
             <p>
                 <label>
                     <input type="radio" name="ans" id="choice1" value="choice1" >
-                    <span for="choice1">Choice 1</span>
+                    <span for="choice1" id = "question-1">Choice 1</span>
                 </label>
             </p>
             <p>
                 <label>
                     <input type="radio" name="ans" id="choice2" value="choice2">
-                    <span for="choice2">Choice 2</span>
+                    <span for="choice2" id = "question-2">Choice 2</span>
                 </label>
             </p>
             <p>
                 <label>
                     <input type="radio" name="ans" id="choice3" value="choice3">
-                    <span for="choice3">Choice 3</span>
+                    <span for="choice3" id = "question-3">Choice 3</span>
                 </label>
             </p>
             <input type="submit" value="Vote" class="btn">

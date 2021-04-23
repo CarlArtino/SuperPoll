@@ -1,6 +1,7 @@
 const form = document.getElementById("vote-form");
 //const createPoll = document.getElementById("questions-form");
 
+var pollQuestion;
 
 //form submit event
 form.addEventListener('submit', e => {
@@ -21,12 +22,39 @@ form.addEventListener('submit', e => {
 e.preventDefault();
 });
 
+setQuestion = function() {
+    if(pollQuestion != null)
+    document.getElementById('the-question').innerHTML = pollQuestion;
+    else document.getElementById('the-question').innerHTML = 'Poll';
+}
+
+setPossibleAnswers = (possibleAnswers) => {
+    //for( i =0; i <4 ; i++) {
+    document.getElementById("question-1").innerHTML = possibleAnswers.questions[0].choices[0];
+    document.getElementById("question-2").innerHTML = possibleAnswers.questions[0].choices[1];
+    document.getElementById("question-3").innerHTML = possibleAnswers.questions[0].choices[2];
+
+
+    //}
+}
+
 function loadQuestion(){
         //get object from local storage
         const poll = JSON.parse(localStorage.getItem('poll'));
         console.log(poll.questions);
         const votes = poll.questions[0].votes;
+        pollQuestion = poll.questions[0].question;
+
+        
+
+        //this sets the question;
+        setQuestion();
+
+        //set the answers
+        setPossibleAnswers(poll);
+        console.log(votes);
         const totalVotes = votes.length;
+
         
         // Count vote points - acc/current
         const voteCounts = votes.reduce(
