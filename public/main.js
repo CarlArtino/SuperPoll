@@ -133,28 +133,25 @@ function loadQuestion(){
 
         fillQuestionForm(poll);
 
+
+        //Below: All things related to chart
         const totalVotes = votes.length;
 
         //Create array parallel to choices that holds the number of votes
-        let voteCounts = new Array(choices.length);
+        let voteCounts = new Array(choices.length).fill(0);
         for(let i = 0; i<votes.length; ++i)
         {
             for(let j = 0; j<choices.length; ++j)
             {
                 if(votes[i] == choices[j])
                 {
+                    console.log("in here");
                     voteCounts[j]++;
                 }
             }
         }
+        console.log(voteCounts);
 
-        // const voteCounts = votes.reduce(
-        //     (acc, vote) => (
-        //         (acc[vote] = (acc[vote] || 0) + 1), acc
-        //         ),
-        //         {}
-        //     );
-        //console.log(voteCounts);
         let dataPoints = new Array();
         
         for(let i = 0; i<choices.length; ++i)
@@ -194,17 +191,38 @@ function loadQuestion(){
             });
 
             var channel = pusher.subscribe('poll');
-            channel.bind('vote', function(data) {
+            channel.bind('vote', data=>{
+                console.log(voteCounts);
                 dataPoints = dataPoints.map(x=> {
-                    if(x.label == data.ans){
-                        x.y += data.points;
-                        return x;
-                    }
-                    else {
-                        return x;
+                    for(let i = 0; i<voteCounts.length; i++){
+                        if(x.label == voteCounts[i] || x.label == data.ans){
+                            
+                            x.y += 1;
+                            return x;
+                        }
+                        else {
+                            return x;
+                        }
                     }
                 });
                 chart.render();
             });
+            
+
+
+
+
+            // channel.bind('vote', function(data) {
+            //     dataPoints = dataPoints.map(x=> {
+            //         if(x.label == data.ans){
+            //             x.y += data.points;
+            //             return x;
+            //         }
+            //         else {
+            //             return x;
+            //         }
+            //     });
+            //     chart.render();
+            // });
         }
 }
