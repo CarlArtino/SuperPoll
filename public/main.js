@@ -22,6 +22,76 @@ form.addEventListener('submit', e => {
 e.preventDefault();
 });
 
+createEmbbededChoiceElement = (inputId, value)=> {
+
+   const p= document.createElement('p');
+   const label = document.createElement('label');
+   const input = document.createElement('input');
+   const span = document.createElement('span');
+
+   span.setAttribute('for', 'option-' + inputId);
+   span.innerHTML  =value;
+
+   input.setAttribute('type', 'radio');
+   input.setAttribute('name', 'ans');
+   input.setAttribute('id','option-' + inputId);
+   
+    
+   label.appendChild(input);
+   label.appendChild(span);
+   p.appendChild(label);
+   return p;
+
+}
+
+//this creates the submit button
+const moveSubmitButton = ()=> {
+    {
+        document.getElementById('finish-vote').remove();
+
+        var submit = document.createElement("input");
+        submit.setAttribute('type', 'submit');
+        submit.setAttribute('id', 'finish-vote');
+        return submit;
+    }
+}
+
+//this creates the question element
+createQuestionElements = (questionId, question) => {
+    const h1 = document.createElement('h1');
+    h1.setAttribute('id', "question-" + questionId );
+    h1.innerHTML = question;
+    return h1;
+} 
+
+// create question elements
+const fillQuestionForm = (questionObject) => {
+    answerId = 1;
+    questionId =1;
+        const form = document.getElementById("vote-form");
+        
+        if(questionObject != null) {
+            // adding question to form
+            const q = createQuestionElements(questionId, questionObject.questions[0].question);
+             form.appendChild(q);
+             questionId++;
+            
+             const choices = questionObject.questions[0].choices;
+
+             console.log("printing out choices" + choices)
+             //adding all options
+             for(i = 0; i < choices.length; i++ ) {
+                 console.log("Creating options" + choices[i]);
+                 const ans = createEmbbededChoiceElement(answerId,choices[i]);
+                 console.log("Choice is" + ans);
+                 form.appendChild(ans);
+                 answerId++;
+             }  
+             
+             form.appendChild(moveSubmitButton());
+        }
+}
+
 setQuestion = function() {
     if(pollQuestion != null)
     document.getElementById('the-question').innerHTML = pollQuestion;
@@ -47,11 +117,14 @@ function loadQuestion(){
 
         
 
-        //this sets the question;
-        setQuestion();
+        // //this sets the question;
+        // setQuestion();
 
-        //set the answers
-        setPossibleAnswers(poll);
+        // //set the answers
+        // setPossibleAnswers(poll);
+
+        fillQuestionForm(poll);
+
         console.log(votes);
         const totalVotes = votes.length;
 
