@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const Vote = require('../models/Vote');
+const Poll = require('../models/Poll');
 
 const Pusher = require("pusher");
 
@@ -16,10 +17,16 @@ const pusher = new Pusher({
 
 
 // url/poll
-router.get('/', (request, response) => {
-    console.log("Page has been callled");
-    response.send('SUPER POLL');
-});
+// router.get('/', (request, response) => {
+//     console.log(request.body);
+//     const id = request.body._id;
+//     Poll.findById(id, (err,results)=>{
+//         if(err)
+//             return console.log(err);
+//         console.log(results);
+//         return response.status(200).send(results);
+//     });
+// });
 
 router.post('/', (request, response) => {
     console.log("Page has")

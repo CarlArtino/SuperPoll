@@ -21,11 +21,13 @@ form.addEventListener('submit', e => {
 e.preventDefault();
 });
 
-fetch('http://localhost:3000/poll')
-    .then(response => response.json())
-    .then(data => {
-        const votes = data.votes;
+function loadQuestion(){
+        //get object from local storage
+        const poll = JSON.parse(localStorage.getItem('poll'));
+        console.log(poll.questions);
+        const votes = poll.questions[0].votes;
         const totalVotes = votes.length;
+        
         // Count vote points - acc/current
         const voteCounts = votes.reduce(
             (acc, vote) => (
@@ -80,4 +82,4 @@ fetch('http://localhost:3000/poll')
                 chart.render();
             });
         }
-    });
+}
