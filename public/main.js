@@ -25,6 +25,12 @@ form.addEventListener('submit', e => {
     .then(data => console.log(data))
     .catch(err =>  console.log(err));
 
+    document.getElementById('answers').remove();
+    document.getElementById('finish-vote').remove();
+    const p = document.createElement('p')
+    p.innerHTML = "Thanks for voting!";
+    form.appendChild(p);
+
 e.preventDefault();
 });
 
@@ -82,7 +88,9 @@ const fillQuestionForm = (questionObject) => {
             const q = createQuestionElements(questionId, questionObject.questions[0].question);
              form.appendChild(q);
              questionId++;
-            
+             const div = document.createElement('div');
+             div.setAttribute('id', 'answers');
+             form.appendChild(div);
              const choices = questionObject.questions[0].choices;
 
              console.log("printing out choices" + choices)
@@ -91,7 +99,7 @@ const fillQuestionForm = (questionObject) => {
                  console.log("Creating options" + choices[i]);
                  const ans = createEmbbededChoiceElement(answerId,choices[i]);
                  console.log("Choice is" + ans);
-                 form.appendChild(ans);
+                 div.appendChild(ans);
                  answerId++;
              }  
              
