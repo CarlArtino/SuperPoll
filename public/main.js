@@ -29,10 +29,22 @@ form.addEventListener('submit', e => {
     document.getElementById('finish-vote').remove();
     const p = document.createElement('p')
     p.innerHTML = "Thanks for voting!";
+    const homeButton = document.createElement('button');
+    homeButton.setAttribute('class', "btn btn-primary btn-xl rounded-pill mt-5 ");
+    homeButton.setAttribute('onClick', 'return redirectToHomePage()');
+    homeButton.innerHTML = "Done";
     form.appendChild(p);
+    form.appendChild(homeButton);
 
 e.preventDefault();
 });
+
+function redirectToHomePage()
+{
+    console.log("called");
+    window.location.href = 'http://www.localhost:3000/index.html';
+    return false;
+}
 
 createEmbbededChoiceElement = (inputId, value)=> {
 
