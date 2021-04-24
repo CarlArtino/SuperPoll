@@ -214,8 +214,7 @@ function loadQuestion(){
             channel.bind('vote', data=>{
                 console.log(voteCounts);
                 dataPoints = dataPoints.map(x=> {
-                    for(let i = 0; i<voteCounts.length; i++){
-                        if(x.label == voteCounts[i] || x.label == data.ans){
+                        if(x.label == data.ans){
                             
                             x.y += 1;
                             return x;
@@ -223,7 +222,6 @@ function loadQuestion(){
                         else {
                             return x;
                         }
-                    }
                 });
                 chart.render();
             });
