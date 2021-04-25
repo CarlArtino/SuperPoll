@@ -56,7 +56,15 @@
 
     </header>
     <section>
-        <button id="q-field" onclick="addQuestionfield()">Add new question field</button>
+        <!-- <button id="q-field" onclick="addQuestionfield()">Add new question field</button> -->
+        <label for="numOfQuestions">Number of Questions</label>
+        <select name="numOfQuestions" id="numOfQuestions">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <button id="q-field" onclick="addQuestionfield()">Enter</button>
         <div class="container ">
             <div class="row align-items-center ">
                 <div class="col-lg-6 order-lg-2 ">
@@ -123,43 +131,63 @@
             if(submitButton != null) submitButton.remove();
             //submitButton.parentNode.deleteChild(submitButton);
             var theForm = document.getElementById("questions-form");
+            const dropDown = document.getElementById("numOfQuestions");
+            const numOfQuestions = dropDown.value;
+            //Title input box
+            theForm.appendChild(createLabel("Poll Title"));
+            theForm.appendChild(createBr());
+            let input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("placeholder", "Title");
+            input.setAttribute("id", "title");
+            theForm.appendChild(input);
+            theForm.appendChild(createBr());
+            //Author input box
+            theForm.appendChild(createLabel("Created by"));
+            theForm.appendChild(createBr());
+            input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("placeholder", "Name");
+            input.setAttribute("id", "author");
+            theForm.appendChild(input);
 
-            //create and add  question element
-            var labl = document.createElement("label")
-            labl.innerHTML = "Next Question";
+            for(let i =0; i<numOfQuestions; ++i){
+                //create and add  question element
+                var labl = document.createElement("label")
+                labl.innerHTML = "Next Question";
 
-            var input1 = document.createElement("input");
-            input1.setAttribute("type", "text");
-            input1.setAttribute("placeholder", "Question");
+                var input1 = document.createElement("input");
+                input1.setAttribute("type", "text");
+                input1.setAttribute("placeholder", "Question");
 
-            theForm.appendChild(createBr());
-            theForm.appendChild(createBr());
-            theForm.appendChild(createBr());
-            theForm.appendChild(createBr());
+                theForm.appendChild(createBr());
+                theForm.appendChild(createBr());
+                theForm.appendChild(createBr());
+                theForm.appendChild(createBr());
 
-            theForm.appendChild(createLabel("New Question"));
-            theForm.appendChild(createBr());
-           theForm.appendChild(createInputElement("text", "Question", true));
+                theForm.appendChild(createLabel("New Question"));
+                theForm.appendChild(createBr());
+                theForm.appendChild(createInputElement("text", "Question", true));
 
-            //create and add answers element
-            theForm.appendChild(createBr());
-            theForm.appendChild(createLabel("Correct Answer"));
-            theForm.appendChild(createBr());
-            theForm.appendChild(createInputElement("text", "Correct Answer", true));
-            theForm.appendChild(createBr());
-            theForm.appendChild(createLabel("Other Answers"));
-            theForm.appendChild(createBr());
-            theForm.appendChild(createInputElement("text", "Dog"));
-            theForm.appendChild(createBr());
-            theForm.appendChild(createInputElement("text", "Cat"));
-            theForm.appendChild(createBr());
-            theForm.appendChild(createInputElement("text", "Mouse"));
+                //create and add answers element
+                theForm.appendChild(createBr());
+                theForm.appendChild(createLabel("Answers"));
+                theForm.appendChild(createBr());
+                theForm.appendChild(createInputElement("text", "Fish"));
+                theForm.appendChild(createBr());
+                theForm.appendChild(createInputElement("text", "Dog"));
+                theForm.appendChild(createBr());
+                theForm.appendChild(createInputElement("text", "Cat"));
+                theForm.appendChild(createBr());
+                theForm.appendChild(createInputElement("text", "Mouse"));
 
-            //replacing submit button with new one on the bottom
-            theForm.appendChild(createBr());
+                //replacing submit button with new one on the bottom
+                theForm.appendChild(createBr());
+                
+                baseFormId+= 1;
+                subFormId = 0;
+            }
             theForm.appendChild(createInputElement("submit","Create Poll" ))
-            baseFormId+= 1;
-            subFormId = 0;
 
         }
 

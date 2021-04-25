@@ -2,23 +2,37 @@ const form = document.getElementById("questions-form");
 //create poll function that calls the backend funciton
 form.addEventListener('submit', e=> {
     
-    theQuestion =document.forms["questions-form"].getElementsByTagName("input")[0].value
-    answer1 =document.forms["questions-form"].getElementsByTagName("input")[1].value;
-    answer2 = document.forms["questions-form"].getElementsByTagName("input")[2].value;
-    answer3 = document.forms["questions-form"].getElementsByTagName("input")[3].value;
-    answer4 = document.forms["questions-form"].getElementsByTagName("input")[4].value;
-      //This is all dummy test data
-      //data will need to be filled with values from user input
+    //Format data from inputs
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const numOfQuestions = document.getElementById("numOfQuestions").value;
+
+    const questions = [];
+
+    for(let i = 0; i<numOfQuestions; ++i)
+    {
+        let questionTemp = document.getElementById(i.toString()+"0").value;
+        let choices = [];
+        for(let j=1; j<=4; ++j){
+            choices.push(document.getElementById(i.toString()+j.toString()).value);
+        }
+        let choicesTemp = [...choices];
+        const obj = {
+            question: questionTemp,
+            choices: choicesTemp
+        };
+        
+        questions.push(obj);
+        choices.length = 0;
+
+    }
+
+      //Data for db
       const data = {
-          title: null,
-          author: null,
-          questions: [
-              {
-                  question:theQuestion ,
-                  choices:[answer1, answer2, answer3, answer4]
-              }
-          ]
-      }
+          title: title,
+          author: author,
+          questions: questions
+      };
       console.log(data);
       //call backend
       fetch('http://localhost:3000/createPoll',{
