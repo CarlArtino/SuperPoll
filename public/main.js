@@ -4,11 +4,11 @@ const form = document.getElementById("vote-form");
 var pollQuestion;
 
 //form submit event
-form.addEventListener('submit', e => {
+function submitVote(counter) {
     const choice = document.querySelector('input[name=ans]:checked').value;
     const poll = JSON.parse(localStorage.getItem('poll'));
     const id = poll._id;
-    const question = poll.questions[0].question;
+    const question = poll.questions[counter].question;
     const data = {ans:choice,
                   id: id,
                   question: question
@@ -25,23 +25,14 @@ form.addEventListener('submit', e => {
     .then(data => console.log(data))
     .catch(err =>  console.log(err));
 
-    document.getElementById('answers').remove();
-    document.getElementById('finish-vote').remove();
-    const p = document.createElement('p')
-    p.innerHTML = "Thanks for voting!";
-    const homeButton = document.createElement('button');
-    homeButton.setAttribute('class', "btn btn-primary btn-xl rounded-pill mt-5 ");
-    homeButton.setAttribute('onClick', 'return redirectToHomePage()');
-    homeButton.innerHTML = "Done";
-    form.appendChild(p);
-    form.appendChild(homeButton);
+    document.getElementById(`answers${counter}`).remove();
+    document.getElementById(`finish-vote-${counter}`).remove();
 
-e.preventDefault();
-});
+}
 
 function redirectToHomePage()
 {
-    console.log("called");
+    
     window.location.href = 'http://www.localhost:3000/index.html';
     return false;
 }
@@ -70,13 +61,14 @@ createEmbbededChoiceElement = (inputId, value)=> {
 }
 
 //this creates the submit button
-const moveSubmitButton = ()=> {
+const moveSubmitButton = (counter)=> {
     {
-        document.getElementById('finish-vote').remove();
 
         var submit = document.createElement("input");
-        submit.setAttribute('type', 'submit');
-        submit.setAttribute('id', 'finish-vote');
+        submit.setAttribute('type', 'button');
+        submit.setAttribute('id', `finish-vote-${counter}`);
+        submit.setAttribute('onClick', `submitVote(${counter})`);
+        submit.setAttribute('value', "Submit");
         return submit;
     }
 }
@@ -90,117 +82,98 @@ createQuestionElements = (questionId, question) => {
 } 
 
 // create question elements
-const fillQuestionForm = (questionObject) => {
+const fillQuestionForm = (questionObject, counter) => {
     answerId = 1;
     questionId =1;
         const form = document.getElementById("vote-form");
         
         if(questionObject != null) {
             // adding question to form
-            const q = createQuestionElements(questionId, questionObject.questions[0].question);
+            const q = createQuestionElements(questionId, questionObject.question);
              form.appendChild(q);
              questionId++;
              const div = document.createElement('div');
-             div.setAttribute('id', 'answers');
+             div.setAttribute('id', `answers${counter}`);
              form.appendChild(div);
-             const choices = questionObject.questions[0].choices;
+             const choices = questionObject.choices;
 
-             console.log("printing out choices" + choices)
              //adding all options
              for(i = 0; i < choices.length; i++ ) {
-                 console.log("Creating options" + choices[i]);
                  const ans = createEmbbededChoiceElement(answerId,choices[i]);
-                 console.log("Choice is" + ans);
                  div.appendChild(ans);
                  answerId++;
              }  
              
-             form.appendChild(moveSubmitButton());
+             form.appendChild(moveSubmitButton(counter));
         }
 }
 
-setQuestion = function() {
-    if(pollQuestion != null)
-    document.getElementById('the-question').innerHTML = pollQuestion;
-    else document.getElementById('the-question').innerHTML = 'Poll';
-}
 
-setPossibleAnswers = (possibleAnswers) => {
-    //for( i =0; i <4 ; i++) {
-    document.getElementById("question-1").innerHTML = possibleAnswers.questions[0].choices[0];
-    document.getElementById("question-2").innerHTML = possibleAnswers.questions[0].choices[1];
-    document.getElementById("question-3").innerHTML = possibleAnswers.questions[0].choices[2];
-
-
-    //}
-}
 
 function loadQuestion(){
         //get object from local storage
         const poll = JSON.parse(localStorage.getItem('poll'));
-        //console.log(poll.questions);
-        const votes = poll.questions[0].votes;
-        pollQuestion = poll.questions[0].question;
-        const choices = poll.questions[0].choices;
 
-        
-
-        // //this sets the question;
-        // setQuestion();
-
-        // //set the answers
-        // setPossibleAnswers(poll);
-
-        fillQuestionForm(poll);
-
-
-        //Below: All things related to chart
-        const totalVotes = votes.length;
-
-        //Create array parallel to choices that holds the number of votes
-        let voteCounts = new Array(choices.length).fill(0);
-        for(let i = 0; i<votes.length; ++i)
+        const votes = [];
+        const pollQuestions = [];
+        const choices = [];
+        const chartContainers = [];
+        for(let i = 0; i<poll.questions.length; ++i)
         {
-            for(let j = 0; j<choices.length; ++j)
+            pollQuestions.push(poll.questions[i].question);
+            votes.push(poll.questions[i].votes);
+            choices.push(poll.questions[i].choices);
+        }
+                
+
+        for(let counter = 0; counter<poll.questions.length; ++counter){
+            fillQuestionForm(poll.questions[counter], counter);
+
+
+            //Below: All things related to chart
+            let totalVotes = votes[counter].length;
+
+            //Create array parallel to choices that holds the number of votes
+            let voteCounts = new Array(choices[counter].length).fill(0);
+            for(let i = 0; i<votes[counter].length; ++i)
             {
-                if(votes[i] == choices[j])
+                for(let j = 0; j<choices[counter].length; ++j)
                 {
-                    console.log("in here");
-                    voteCounts[j]++;
+                    if(votes[counter][i] == choices[counter][j])
+                    {
+                        voteCounts[j]++;
+                    }
                 }
             }
-        }
-        console.log(voteCounts);
 
-        let dataPoints = new Array();
-        
-        for(let i = 0; i<choices.length; ++i)
-        {
-            dataPoints.push({label: choices[i], y: voteCounts[i]});
-        }
-        // let dataPoints = [
-        //     {label : 'choice1', y: voteCounts.choice1},
-        //     {label : 'choice2', y: voteCounts.choice2},
-        //     {label : 'choice3', y: voteCounts.choice3},
-        // ];
+            let dataPoints = new Array();
+            
+            for(let i = 0; i<choices[counter].length; ++i)
+            {
+                dataPoints.push({label: choices[counter][i], y: voteCounts[i]});
+            }
 
-        const chartContainer = document.querySelector('#chartContainer');
+            chartContainers[counter] = document.createElement('div');
+            chartContainers[counter].setAttribute('id', `chartContainer${counter}`);
+            chartContainers[counter].setAttribute('style', "height:300px; width:100%");
+            form.appendChild(chartContainers[counter]);
 
-        if(chartContainer) {
-            const chart = new CanvasJS.Chart('chartContainer', {
-                animationEnabled: true,
-                theme: 'theme1',
-                title : {
-                    text: `Total Votes ${totalVotes}`
-                },
-                data: [
-                    {
-                        type: 'column',
-                        dataPoints: dataPoints
-                    }
-                ]
-            });
-            chart.render();
+            if(chartContainers[counter]) {
+                const chart = new CanvasJS.Chart(`chartContainer${counter}`, {
+                    animationEnabled: true,
+                    theme: 'theme1',
+                    title : {
+                        text: `Total Votes ${totalVotes}`
+                    },
+                    data: [
+                        {
+                            type: 'column',
+                            dataPoints: dataPoints
+                        }
+                    ],
+                    counter: counter
+                });
+                chart.render();
 
             //Enable pusher logging
             Pusher.logToConsole = true;
@@ -212,10 +185,12 @@ function loadQuestion(){
 
             var channel = pusher.subscribe('poll');
             channel.bind('vote', data=>{
-                console.log(voteCounts);
                 dataPoints = dataPoints.map(x=> {
-                        if(x.label == data.ans){
-                            
+                    const index = poll.questions.findIndex(item=>{
+                        return item.question==data.ques;
+                    });
+                        if(x.label == data.ans && chart.options.counter == index){
+                            totalVotes++;
                             x.y += 1;
                             return x;
                         }
@@ -223,24 +198,10 @@ function loadQuestion(){
                             return x;
                         }
                 });
+                chart.options.title.text = `Total Votes ${totalVotes}`;
                 chart.render();
             });
-            
-
-
-
-
-            // channel.bind('vote', function(data) {
-            //     dataPoints = dataPoints.map(x=> {
-            //         if(x.label == data.ans){
-            //             x.y += data.points;
-            //             return x;
-            //         }
-            //         else {
-            //             return x;
-            //         }
-            //     });
-            //     chart.render();
-            // });
         }
+
+    }
 }

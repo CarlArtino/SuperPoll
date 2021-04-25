@@ -33,7 +33,7 @@ form.addEventListener('submit', e=> {
           author: author,
           questions: questions
       };
-      console.log(data);
+
       //call backend
       fetch('http://localhost:3000/createPoll',{
           method: 'post',
@@ -44,7 +44,6 @@ form.addEventListener('submit', e=> {
       })
       .then(response => response.json())
       .then(data =>{
-          console.log("Check");
           console.log(data);
       })
       .catch(err=>console.log(err));

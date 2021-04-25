@@ -11,7 +11,7 @@ router.post('/', (request, response)=>{
     Poll.findById(id, (err,results)=>{
         if(err)
             return console.log(err);
-        console.log(results);
+
         return response.status(200).send(results);
     });
 });

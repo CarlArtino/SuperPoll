@@ -17,21 +17,7 @@ const pusher = new Pusher({
 });
 
 
-// url/poll
-// router.get('/', (request, response) => {
-//     console.log(request.body);
-//     const id = request.body._id;
-//     Poll.findById(id, (err,results)=>{
-//         if(err)
-//             return console.log(err);
-//         console.log(results);
-//         return response.status(200).send(results);
-//     });
-// });
-
-
 router.post('/', (request, response) => {
-
     Poll.updateOne({"_id": request.body.id, "questions.question": request.body.question}, {$push: {"questions.$.votes": request.body.ans}}, (err, res)=>{
         if(err)
             console.log(err);
@@ -39,7 +25,8 @@ router.post('/', (request, response) => {
 
     pusher.trigger("poll", "vote", {
         points: 1,
-        ans: request.body.ans
+        ans: request.body.ans,
+        ques: request.body.question
     });
     return response.json({ success: true, message: 'Thanks for voting' });
 });

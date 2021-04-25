@@ -14,7 +14,7 @@ const Poll = require('../models/Poll');
     ]
 */
 router.post('/', (request,response)=>{
-    console.log("backend");
+
     const newPoll = {
         title: request.body.title,
         author: request.body.author,
@@ -22,8 +22,6 @@ router.post('/', (request,response)=>{
     }
     //save to db
     new Poll(newPoll).save().then(poll =>{
-        console.log(poll);
-        console.log(poll._id);
         return response.status(201).send(poll._id);
     })
     .catch(err=>{
