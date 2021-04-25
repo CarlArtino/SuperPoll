@@ -124,12 +124,10 @@
         }
 
         let addQuestionfield = () => {
-            console.log("new q called");
 
             //delete submit button
             var submitButton = document.getElementById("poll-create");
             if(submitButton != null) submitButton.remove();
-            //submitButton.parentNode.deleteChild(submitButton);
             var theForm = document.getElementById("questions-form");
             const dropDown = document.getElementById("numOfQuestions");
             const numOfQuestions = dropDown.value;

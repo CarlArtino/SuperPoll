@@ -114,6 +114,12 @@ function loadQuestion(){
         //get object from local storage
         const poll = JSON.parse(localStorage.getItem('poll'));
 
+        const title = document.getElementById("title");
+        title.innerHTML = poll.title;
+
+        const author = document.getElementById("author");
+        author.innerHTML = `By ${poll.author}`;
+
         const votes = [];
         const pollQuestions = [];
         const choices = [];
