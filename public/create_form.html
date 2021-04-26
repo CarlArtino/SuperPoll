@@ -61,14 +61,14 @@
         <!-- <button id="q-field" onclick="addQuestionfield()">Add new question field</button> -->
         <div class= "row align-items-center">
             <label for="numOfQuestions">Number of Questions</label>
-            <br />
-            <select name="numOfQuestions" id="numOfQuestions">
+            <br/>
+            <select name="numOfQuestions" id="numOfQuestions" class = "ml-1">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
             </select>
-            <button id="q-field" onclick="addQuestionfield()">Enter</button>
+            <button id="q-field" onclick="addQuestionfield()" class = "btn btn-primary btn-small ml-2 mt-1">Enter</button>
         </div>
         <div class="container column align-items-center">
         
@@ -184,7 +184,7 @@
                 mainContainer.appendChild(container);
                 //create and add  question element
                 var labl = document.createElement("label")
-                labl.innerHTML = "Next Question";
+                labl.innerHTML = "Question:";
 
                 var input1 = document.createElement("input");
                 input1.setAttribute("type", "text");
