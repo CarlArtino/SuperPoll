@@ -15,7 +15,8 @@
 
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/one-page-wonder.min.css" rel="stylesheet">
@@ -28,13 +29,14 @@
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
         <div class="container">
             <!--<a class="navbar-brand" href="#">Start Bootstrap</a>-->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"> Super Poll</a>
+                        <a class="nav-link" href= "/"> Super Poll</a>
                     </li>
 
                 </ul>
@@ -49,38 +51,48 @@
             </div>
             <style type="text/css">
                 num-button {
-                    height: 20px;
+                    height: 10px;
                 }
             </style>
         </div>
 
     </header>
-    <section>
+    <section >
         <!-- <button id="q-field" onclick="addQuestionfield()">Add new question field</button> -->
-        <label for="numOfQuestions">Number of Questions</label>
-        <select name="numOfQuestions" id="numOfQuestions">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-        </select>
-        <button id="q-field" onclick="addQuestionfield()">Enter</button>
-        <div class="container ">
-            <div class="row align-items-center ">
-                <div class="col-lg-6 order-lg-2 ">
-                    <br/>
+        <div class= "row align-items-center">
+            <label for="numOfQuestions">Number of Questions</label>
+            <br />
+            <select name="numOfQuestions" id="numOfQuestions">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <button id="q-field" onclick="addQuestionfield()">Enter</button>
+        </div>
+        <div class="container column align-items-center">
+        
+                <div  id="center-point">
+                    <br />
                     <form id="questions-form">
 
+
                     </form>
-                    <br/>
+                    <br />
                 </div>
-            </div>
+            
         </div>
+        
     </section>
+
+    <br/>
+    <br/>
+    <br/>
     <!-- Footer -->
-    <footer class=" py-5 bg-black ">
+    <footer class=" py-5 bg-black bottom-0 ">
         <div class="container ">
-            <p class="m-0 text-center text-white small "><a href="https://github.com/CarlArtino/SuperPoll ">Link to Our Github</a></p>
+            <p class="m-0 text-center text-white small "><a href="https://github.com/CarlArtino/SuperPoll ">Link to Our
+                    Github</a></p>
         </div>
         <!-- /.container -->
     </footer>
@@ -90,66 +102,86 @@
 
     <script type='text/javascript'>
 
-    //This is incremented everytime a new question field is added to the form and is used as a unique class for each question
-    var baseFormId =  0;
-    var subFormId=0;
-        createBr = () => {
-            return document.createElement("br");
-        }
+        //This is incremented everytime a new question field is added to the form and is used as a unique class for each question
+        var baseFormId = 0;
+        var subFormId = 0;
+        var titleSet = false;
+
 
         createInputElement = (type, placeholder, isRequired) => {
             var el = document.createElement("input");
             el.setAttribute("type", type);
-            if(type != "submit") {
-            el.setAttribute("required", isRequired);
-            el.setAttribute("placeholder", placeholder);
-            el.setAttribute("id", baseFormId.toString() + subFormId.toString());
-            subFormId++;
-          }
-          else {
-            el.setAttribute("value", "Create Poll");
-            el.setAttribute("id", "poll-create");
+            if (type != "submit") {
+                el.setAttribute("required", isRequired);
+                el.setAttribute("placeholder", placeholder);
+                el.setAttribute("id", baseFormId.toString() + subFormId.toString());
+                subFormId++;
+            }
+            else {
+                el.setAttribute("value", "Create Poll");
+                el.setAttribute("class", "btn btn-primary btn-xl rounded-pill mt-5")
+                el.setAttribute("id", "poll-create");
 
-          }
+            }
 
             return el;
         }
 
         createLabel = (title) => {
-          var label = document.createElement("label");
-          //label.setAttribute("id", baseQuestionId + title);
-          label.innerHTML = title;
+            var label = document.createElement("label");
+            //label.setAttribute("id", baseQuestionId + title);
+            label.innerHTML = title;
 
-          return label;
+            return label;
         }
 
         let addQuestionfield = () => {
 
             //delete submit button
-            var submitButton = document.getElementById("poll-create");
-            if(submitButton != null) submitButton.remove();
+            var submitButton = document.getElementById("submit-container");
+            if (submitButton != null) submitButton.remove();
             var theForm = document.getElementById("questions-form");
             const dropDown = document.getElementById("numOfQuestions");
             const numOfQuestions = dropDown.value;
+
+            if(titleSet != true) {
+            // creating container for autho info
+            const pollInfoContainer = document.createElement("div");
+            pollInfoContainer.setAttribute("class", "d-flex flex-column justify-content-xl- between");
+
+
             //Title input box
-            theForm.appendChild(createLabel("Poll Title"));
-            theForm.appendChild(createBr());
+            pollInfoContainer.appendChild(createLabel("Poll Title"));
+            pollInfoContainer.appendChild(createBr());
             let input = document.createElement("input");
             input.setAttribute("type", "text");
             input.setAttribute("placeholder", "Title");
             input.setAttribute("id", "title");
-            theForm.appendChild(input);
-            theForm.appendChild(createBr());
+            pollInfoContainer.appendChild(input);
+            pollInfoContainer.appendChild(createBr());
+
             //Author input box
-            theForm.appendChild(createLabel("Created by"));
-            theForm.appendChild(createBr());
+            pollInfoContainer.appendChild(createLabel("Created by"));
+            pollInfoContainer.appendChild(createBr());
             input = document.createElement("input");
             input.setAttribute("type", "text");
             input.setAttribute("placeholder", "Name");
             input.setAttribute("id", "author");
-            theForm.appendChild(input);
+            pollInfoContainer.appendChild(input);
 
-            for(let i =0; i<numOfQuestions; ++i){
+            theForm.appendChild(pollInfoContainer);
+            theForm.appendChild(createBr());
+
+            titleSet = true;
+            }
+
+            var mainContainer = document.createElement("div");
+            mainContainer.setAttribute("class", "d-flex column align-items-center");
+            for (let i = 0; i < numOfQuestions; ++i) {
+                var container = document.createElement("div");
+                container.setAttribute("class", " shadow-none p-3 mb-5 bg-light rounded mt-3");
+                container.setAttribute("style", "width:  30rem")
+                mainContainer.appendChild(container);
                 //create and add  question element
                 var labl = document.createElement("label")
                 labl.innerHTML = "Next Question";
@@ -158,39 +190,43 @@
                 input1.setAttribute("type", "text");
                 input1.setAttribute("placeholder", "Question");
 
-                theForm.appendChild(createBr());
-                theForm.appendChild(createBr());
-                theForm.appendChild(createBr());
-                theForm.appendChild(createBr());
+                container.appendChild(createBr());
 
-                theForm.appendChild(createLabel("New Question"));
-                theForm.appendChild(createBr());
-                theForm.appendChild(createInputElement("text", "Question", true));
+                container.appendChild(createLabel("New Question"));
+                container.appendChild(createBr());
+                container.appendChild(createInputElement("text", "Question", true));
 
                 //create and add answers element
-                theForm.appendChild(createBr());
-                theForm.appendChild(createLabel("Answers"));
-                theForm.appendChild(createBr());
-                theForm.appendChild(createInputElement("text", "Fish"));
-                theForm.appendChild(createBr());
-                theForm.appendChild(createInputElement("text", "Dog"));
-                theForm.appendChild(createBr());
-                theForm.appendChild(createInputElement("text", "Cat"));
-                theForm.appendChild(createBr());
-                theForm.appendChild(createInputElement("text", "Mouse"));
+                container.appendChild(createBr());
+                container.appendChild(createLabel("Answers"));
+                container.appendChild(createBr());
+                container.appendChild(createInputElement("text", "Fish"));
+                container.appendChild(createBr());
+                container.appendChild(createInputElement("text", "Dog"));
+                container.appendChild(createBr());
+                container.appendChild(createInputElement("text", "Cat"));
+                container.appendChild(createBr());
+                container.appendChild(createInputElement("text", "Mouse"));
 
                 //replacing submit button with new one on the bottom
-                theForm.appendChild(createBr());
-                
-                baseFormId+= 1;
+                container.appendChild(createBr());
+
+                baseFormId += 1;
                 subFormId = 0;
             }
-            theForm.appendChild(createInputElement("submit","Create Poll" ))
+            
+            theForm.appendChild(mainContainer);
+            theForm.appendChild(createBr());
+            const submitContainer = document.createElement("div");
+            submitContainer.setAttribute("class", "d-flex justify-content-center")
+            submitContainer.setAttribute("id", "submit-container");
+            submitContainer.appendChild(createInputElement("submit", "Create Poll"));
+            theForm.appendChild(submitContainer);
 
         }
 
-      </script>
-      <script src="frontCreatePoll.js" defer></script>
+    </script>
+    <script src="frontCreatePoll.js" defer></script>
 </body>
 
 </html>

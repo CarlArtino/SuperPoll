@@ -44,9 +44,42 @@ form.addEventListener('submit', e=> {
       })
       .then(response => response.json())
       .then(data =>{
-          console.log(data);
+          console.log("code is: ",data);
+          deleteForm(data);
       })
       .catch(err=>console.log(err));
     e.preventDefault();
 });
+
+const deleteForm = (code) => {
+    const form = document.getElementById("questions-form");
+    form.remove();
+    
+    const container = document.getElementById("center-point");
+    
+    const pollContainer = document.createElement("h1");
+    // pollContainer.setAttribute("id", "poll-code");
+    // pollContainer.setAttribute("class", "mw-100 mh-100 text-xl-center");
+    
+    // pollContainer.innerHTML = "Success!!\n" +"\nYour New Poll Code is:\n" + code;
+    container.setAttribute("class", "justify-content-center")
+    container.appendChild(createText("Success!!", null));
+    container.appendChild(createBr());
+    container.appendChild(createText("Your new poll code is:" ));
+    container.appendChild(createBr());
+    container.appendChild(createText(code, ".bg-success"));
+
+}
+
+function createText(text, color) {
+    const textElement = document.createElement("h1");
+    textElement.innerHTML = text;
+    textElement.setAttribute("class", color + " text-center");
+
+    return textElement;
+}
+
+createBr = () => {
+    return document.createElement("br");
+}
   

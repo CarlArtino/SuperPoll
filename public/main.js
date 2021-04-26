@@ -63,12 +63,13 @@ createEmbbededChoiceElement = (inputId, value)=> {
 //this creates the submit button
 const moveSubmitButton = (counter)=> {
     {
-
         var submit = document.createElement("input");
         submit.setAttribute('type', 'button');
         submit.setAttribute('id', `finish-vote-${counter}`);
         submit.setAttribute('onClick', `submitVote(${counter})`);
         submit.setAttribute('value', "Submit");
+        submit.setAttribute("style", style="margin-top: 30px; margin-left:5% ");
+        submit.setAttribute("class", "btn btn-primary btn-md rounded-pill mt-5");
         return submit;
     }
 }
