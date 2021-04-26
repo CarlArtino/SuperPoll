@@ -67,14 +67,21 @@ const deleteForm = (code) => {
     container.appendChild(createBr());
     container.appendChild(createText("Your new poll code is:" ));
     container.appendChild(createBr());
-    container.appendChild(createText(code, ".bg-success"));
+    container.appendChild(createText(code, "bg-success", true));
 
 }
 
-function createText(text, color) {
+function createText(text, color, isLink) {
     const textElement = document.createElement("h1");
+
     textElement.innerHTML = text;
     textElement.setAttribute("class", color + " text-center");
+    // if(isLink == true) {
+    //     const link = document.createElement("a");
+    //     link.setAttribute("href", "/?" + code);
+    //     link.appendChild(textElement);
+    //     return link;
+    // }
 
     return textElement;
 }
