@@ -54,6 +54,13 @@ form.addEventListener('submit', e=> {
 const deleteForm = (code) => {
     const form = document.getElementById("questions-form");
     form.remove();
+    document.getElementById("questionDiv").remove();
+
+    const doneButton = document.createElement("button");
+    doneButton.setAttribute("id", "doneButton");
+    doneButton.innerHTML = "Done";
+    doneButton.setAttribute("class", "btn btn-primary btn-small ml-2 mt-1");
+    doneButton.setAttribute("onClick", "redirectToHomePage()");
     
     const container = document.getElementById("center-point");
     
@@ -68,6 +75,7 @@ const deleteForm = (code) => {
     container.appendChild(createText("Your new poll code is:" ));
     container.appendChild(createBr());
     container.appendChild(createText(code, "bg-success", true));
+    container.appendChild(doneButton);
 
 }
 
@@ -88,5 +96,12 @@ function createText(text, color, isLink) {
 
 createBr = () => {
     return document.createElement("br");
+}
+
+function redirectToHomePage()
+{
+    
+    window.location.href = 'http://www.localhost:3000/index.html';
+    return false;
 }
   
