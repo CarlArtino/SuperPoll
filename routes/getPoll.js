@@ -9,8 +9,10 @@ router.post('/', (request, response)=>{
     const id = request.body;
     //find id
     Poll.findById(id, (err,results)=>{
-        if(err)
-            return console.log(err);
+        if(err){
+            console.log(err);
+            return response.status(401).send();
+        }
 
         return response.status(200).send(results);
     });

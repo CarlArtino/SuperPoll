@@ -18,7 +18,10 @@ form.addEventListener('submit', e => {
         localStorage.setItem("poll", JSON.stringify(data));
         window.location.replace( 'http://www.localhost:3000/vote_page.html');
     })
-    .catch(err=>console.log(err));
+    .catch(err=>{
+        console.log(err);
+        alert("Code does not exist");
+    });
 
     e.preventDefault();
     
