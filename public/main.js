@@ -33,7 +33,7 @@ function submitVote(counter) {
 function redirectToHomePage()
 {
     
-    window.location.href = 'https://blooming-atoll-12908.herokuapp.com/index.html';
+    window.location.href = 'https://super-poll.herokuapp.com/index.html';
     return false;
 }
 

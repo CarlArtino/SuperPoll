@@ -16,7 +16,7 @@ form.addEventListener('submit', e => {
     .then(data =>{
         console.log(data);
         localStorage.setItem("poll", JSON.stringify(data));
-        window.location.replace( 'https://blooming-atoll-12908.herokuapp.com/vote_page.html');
+        window.location.replace( 'https://super-poll.herokuapp.com/vote_page.html');
     })
     .catch(err=>console.log(err));
 
