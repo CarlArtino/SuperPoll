@@ -14,7 +14,7 @@ function submitVote(counter) {
                   question: question
                 };
 
-    fetch('http://localhost:3000/poll', {
+    fetch('https://blooming-atoll-12908.herokuapp.com/poll', {
         method: 'post',
         body: JSON.stringify(data),
         headers: new Headers({
@@ -33,7 +33,7 @@ function submitVote(counter) {
 function redirectToHomePage()
 {
     
-    window.location.href = 'http://www.localhost:3000/index.html';
+    window.location.href = 'https://blooming-atoll-12908.herokuapp.com/index.html';
     return false;
 }
 
