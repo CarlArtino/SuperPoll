@@ -35,7 +35,7 @@ form.addEventListener('submit', e=> {
       };
 
       //call backend
-      fetch('http://localhost:3000/createPoll',{
+      fetch('/createPoll',{
           method: 'post',
           body: JSON.stringify(data),
           headers: new Headers({
