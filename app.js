@@ -28,7 +28,9 @@ app.use('/createPoll', createPoll);
 
 app.use('/getPoll', getPoll);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
+
+app.set("port", port);
 
 //start server
-app.listen(port, () => console.log(`Server started on port ${port}`));
+//app.listen(port, () => console.log(`Server started on port ${port}`));
