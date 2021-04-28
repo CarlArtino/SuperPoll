@@ -14,7 +14,7 @@ function submitVote(counter) {
                   question: question
                 };
 
-    fetch('https://blooming-atoll-12908.herokuapp.com/poll', {
+    fetch('https://super-poll.herokuapp.com/poll', {
         method: 'post',
         body: JSON.stringify(data),
         headers: new Headers({
