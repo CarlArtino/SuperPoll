@@ -33,4 +33,4 @@ const port = process.env.PORT || 3000;
 app.set("port", port);
 
 //start server
-app.listen(port,'0.0.0.0.0' ,() => console.log(`Server started on port ${port}`));
+app.listen(port,'0.0.0.0' ,() => console.log(`Server started on port ${port}`));
