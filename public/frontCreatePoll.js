@@ -101,7 +101,7 @@ createBr = () => {
 function redirectToHomePage()
 {
     
-    window.location.href = 'http://www.localhost:3000/index.html';
+    window.location.href = 'https://super-poll.herokuapp.com/index.html';
     return false;
 }
   
